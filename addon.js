@@ -1,4 +1,32 @@
 // addon.js
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+// Serviraj manifest.json
+app.get('/manifest.json', (req, res) => {
+    res.sendFile(__dirname + '/manifest.json');
+});
+
+// Tvoj postojeći Stremio addon
+const { addonBuilder } = require("stremio-addon-sdk");
+
+const builder = new addonBuilder({
+  id: "stremio-gemini-addon-mchopa",
+  version: "1.0.0",
+  name: "Gemini AI Subtitle Translator",
+  description: "Prevodi engleske titlove koristeći Gemini AI",
+  resources: ["subtitles"],
+  types: ["movie", "series"],
+  catalogs: []
+});
+
+// Handleri i translate funkcije
+// ... tvoj postojeći kod za prevođenje titlova ...
+
+// Start Stremio addon server
+builder.listen(app);
+app.listen(PORT, '0.0.0.0', () => console.log(`Addon listening on port ${PORT}`));
 const { addonBuilder } = require("stremio-addon-sdk");
 const fetch = require('node-fetch'); // Ako koristiš fetch za Gemini
 
