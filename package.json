@@ -1,12 +1,9 @@
 {
   "name": "stremio-gemini-addon",
   "version": "1.0.0",
+  "description": "Gemini AI Subtitle Translator for Stremio",
   "main": "addon.js",
   "dependencies": {
-    "stremio-addon-sdk": "^0.6.0",
-    "node-fetch": "^3.3.2"
-  },
-  "scripts": {
-    "start": "node addon.js"
+    "stremio-addon-sdk": "^1.0.0"
   }
 }
