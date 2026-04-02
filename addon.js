@@ -1,22 +1,12 @@
 // addon.js
 const { addonBuilder } = require("stremio-addon-sdk");
-
-const builder = new addonBuilder({
-  id: "org.stremio.gemini",
-  version: "1.0.0",
-  name: "Gemini AI Subtitle Translator",
-  description: "Translates English subtitles using Gemini AI"
-});
-
-// ostatak koda
-const { addonBuilder } = require('stremio-addon-sdk');
 const fetch = require('node-fetch'); // Ako koristiš fetch za Gemini
 
 // --- Gemini API key ---
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'ovdje-stavi-svoj-api-key';
 
-// Kreiranje addon buildera (bez "new")
-const builder = addonBuilder({
+// Kreiranje addon buildera
+const builder = new addonBuilder({
     id: 'stremio-gemini-addon-hqowwa',
     version: '1.0.0',
     name: 'Stremio Gemini Addon',
@@ -49,7 +39,6 @@ async function translateSubtitle(text) {
 
 // Handler za subove
 builder.defineSubtitlesHandler(async ({ id, type, url }) => {
-    // Pretpostavimo da Stremio već šalje URL titla
     const res = await fetch(url);
     const text = await res.text();
 
