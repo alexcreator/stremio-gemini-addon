@@ -64,7 +64,8 @@ const builder = new addonBuilder({
     version: "1.2.0",
     name: "Translate EN → SR (Persistent Cache)",
     resources: ["subtitles"],
-    types: ["movie", "series"]
+    types: ["movie", "series"],
+    catalogs: []
 });
 
 // 📝 handler za subtitles
