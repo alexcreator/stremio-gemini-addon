@@ -45,6 +45,6 @@ builder.defineSubtitlesHandler(async function(args, cb) {
 // START SERVER
 require("http")
     .createServer(builder.getInterface())
-    .listen(process.env.PORT || 7000, () => {
+    .listen(process.env.PORT || 8800, () => {
         console.log("Addon running...");
     });
