@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for stremio-gemini-addon-hqowwa on 2026-04-02T22:09:09Z
+# fly.toml app configuration file generated for stremio-gemini-addon-danbog on 2026-04-02T22:33:08Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'stremio-gemini-addon-hqowwa'
+app = 'stremio-gemini-addon-danbog'
 primary_region = 'ams'
 
 [build]
