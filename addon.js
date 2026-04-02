@@ -4,13 +4,13 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const crypto = require("crypto");
 const fs = require("fs");
 
-// 🔑 API KEY
-const genAI = new GoogleGenerativeAI(process.env.AIzaSyD6heS3A5AdaM8_SYy1pru3IQ-RrE0k3Ys);
+// 🔑 API KEY iz Environment Variable
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// 📁 cache fajl
+// 📁 Trajni cache fajl
 const CACHE_FILE = "./cache.json";
 
-// 📥 učitaj cache
+// 📥 učitaj cache ako postoji
 let cache = {};
 if (fs.existsSync(CACHE_FILE)) {
     try {
@@ -20,17 +20,17 @@ if (fs.existsSync(CACHE_FILE)) {
     }
 }
 
-// 💾 snimi cache
+// 💾 funkcija za spremanje cache-a
 function saveCache() {
     fs.writeFileSync(CACHE_FILE, JSON.stringify(cache));
 }
 
-// 🔑 hash
+// 🔑 generiši hash za svaki subtitle
 function generateHash(text) {
     return crypto.createHash("md5").update(text).digest("hex");
 }
 
-// ✂️ split
+// ✂️ split velikih fajlova
 function splitText(text, maxLength = 2000) {
     const parts = [];
     let current = "";
@@ -47,7 +47,7 @@ function splitText(text, maxLength = 2000) {
     return parts;
 }
 
-// 🌍 prevod
+// 🌍 funkcija za prevod koristeći Gemini API
 async function translateText(text) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
@@ -58,7 +58,7 @@ async function translateText(text) {
     return response.text();
 }
 
-// 🎬 addon
+// 🎬 Stremio addon builder
 const builder = new addonBuilder({
     id: "org.gemini.translate.persistent",
     version: "1.2.0",
@@ -67,6 +67,7 @@ const builder = new addonBuilder({
     types: ["movie", "series"]
 });
 
+// 📝 handler za subtitles
 builder.defineSubtitlesHandler(async (args) => {
     const subtitles = [];
 
@@ -98,7 +99,7 @@ builder.defineSubtitlesHandler(async (args) => {
                     translated += await translateText(part);
                 }
 
-                // 💾 SPREMI
+                // 💾 SPREMI u cache
                 cache[hash] = translated;
                 saveCache();
 
@@ -117,7 +118,7 @@ builder.defineSubtitlesHandler(async (args) => {
     return { subtitles };
 });
 
-// 🚀 server
+// 🚀 pokreni server
 require("http")
     .createServer(builder.getInterface())
     .listen(process.env.PORT || 7000, () => {
