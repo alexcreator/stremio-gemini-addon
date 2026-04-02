@@ -1,0 +1,11 @@
+{
+  "id": "stremio-gemini-addon-mchopa",
+  "version": "1.0.0",
+  "name": "Gemini AI Subtitle Translator",
+  "description": "Prevodi engleske titlove koristeći Gemini AI",
+  "resources": ["subtitles"],
+  "types": ["movie", "series"],
+  "catalogs": [],
+  "idPrefixes": [],
+  "logo": "https://stremio-gemini-addon-mchopa.fly.dev/logo.png"
+}
