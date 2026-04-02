@@ -1,5 +1,14 @@
 // addon.js
+const { addonBuilder } = require("stremio-addon-sdk");
 
+const builder = new addonBuilder({
+  id: "org.stremio.gemini",
+  version: "1.0.0",
+  name: "Gemini AI Subtitle Translator",
+  description: "Translates English subtitles using Gemini AI"
+});
+
+// ostatak koda
 const { addonBuilder } = require('stremio-addon-sdk');
 const fetch = require('node-fetch'); // Ako koristiš fetch za Gemini
 
